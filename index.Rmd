@@ -1,0 +1,59 @@
+---
+title: "7 Wonders of the Ancient World"
+date: "20/08/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+```
+
+```{r map, echo = FALSE, include=TRUE, comment = "", fig.height=12, fig.width=12}
+
+wonders_df <- data.frame(popup = c(
+                          "<a href='https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza'>Great Pyramid of Giza</a>",
+                          "<a href='https://en.wikipedia.org/wiki/Hanging_Gardens_of_Babylon'>Hanging Gardens of Babylon</a>",
+                          "<a href='https://en.wikipedia.org/wiki/Statue_of_Zeus_at_Olympia'>Statue of Zeus at Olympia</a>",
+                          "<a href='https://en.wikipedia.org/wiki/Temple_of_Artemis'>Temple of Artemis</a>",
+                          "<a href='https://en.wikipedia.org/wiki/Mausoleum_at_Halicarnassus'>Mausoleum at Halicarnassus</a>",
+                          "<a href='https://en.wikipedia.org/wiki/Colossus_of_Rhodes'>Colossus of Rhodes</a>",
+                          "<a href='https://en.wikipedia.org/wiki/Lighthouse_of_Alexandria'>Lighthouse of Alexandria</a>"),
+                 latitude = c(29.9792,32.5355,37.6360,37.9496,37.0379,36.4510,31.205753),
+                 longitude = c(31.1342,44.4275,21.6247,27.3639,27.4241,28.2258,29.924526),
+                 code = factor(as.factor(c("giza","babylon","olympia","artemis","hali","rhodes","alex")),
+                                      levels = c("giza","babylon","olympia","artemis","hali","rhodes","alex"))
+                 )
+
+iconwidth <- 23
+iconheight <- 23
+wonders_icons <- iconList(
+       giza <- makeIcon(iconUrl = "https://hdclipartall.com/images/pyramid-cliparts-pyramid-clipart-8124_4838.png",
+                          iconWidth = iconwidth, iconHeight = iconheight),
+       babylon <- makeIcon(iconUrl = "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/68174/hanging-gardens-of-babylon-clipart-xl.png",
+                          iconWidth = iconwidth, iconHeight = iconheight),
+       olympia <- makeIcon(iconUrl = "https://thumbs.dreamstime.com/b/statue-zeus-wonders-world-digital-painting-background-illustration-cartoon-style-character-88473797.jpg",
+                          iconWidth = iconwidth, iconHeight = iconheight),
+       artemis <- makeIcon(iconUrl = "https://s3.amazonaws.com/html5.powershow.com/P1248711732fADhM/data/img0.jpg",
+                          iconWidth = iconwidth, iconHeight = iconheight),
+       hali <- makeIcon(iconUrl = "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/68171/mausoleum-at-halicarnassus-clipart-xl.png",
+                          iconWidth = iconwidth, iconHeight = iconheight),
+       rhodes <- makeIcon(iconUrl = "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/68172/colossus-of-rhodes-clipart-xl.png",
+                          iconWidth = iconwidth, iconHeight = iconheight),
+       alex <- makeIcon(iconUrl = "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/68173/lighthouse-of-alexandria-clipart-xl.png",
+                          iconWidth = iconwidth, iconHeight = iconheight)     
+)
+
+
+wonders_df %>%
+  leaflet() %>%
+  addTiles() %>% 
+  addMarkers(lng  = ~longitude, lat = ~latitude,
+          popup = ~popup, icon = ~ wonders_icons[as.numeric(code)],
+          clusterOptions = markerClusterOptions())
+
+
+
+```
+
+
