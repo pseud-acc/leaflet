@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(leaflet)
 ```
 
-```{r map, echo = FALSE, include=TRUE, comment = "", fig.height=12, fig.width=12}
+```{r map, echo = FALSE, include=TRUE, comment = "", fig.height=9, fig.width=9}
 
 wonders_df <- data.frame(popup = c(
                           "<a href='https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza'>Great Pyramid of Giza</a>",
