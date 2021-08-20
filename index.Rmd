@@ -21,7 +21,7 @@ wonders_df <- data.frame(popup = c(
                           "<a href='https://en.wikipedia.org/wiki/Lighthouse_of_Alexandria'>Lighthouse of Alexandria</a>"),
                  latitude = c(29.9792,32.5355,37.6360,37.9496,37.0379,36.4510,31.205753),
                  longitude = c(31.1342,44.4275,21.6247,27.3639,27.4241,28.2258,29.924526),
-                 code = factor(as.factor(c("giza","babylon","olympia","artemis","hali","rhodes","alex")),
+                 code = factor(c("giza","babylon","olympia","artemis","hali","rhodes","alex"),
                                       levels = c("giza","babylon","olympia","artemis","hali","rhodes","alex"))
                  )
 
